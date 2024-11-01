@@ -17,7 +17,7 @@ const Dashboard = () => {
         <li >
             <NavLink className='flex items-center font-bold gap-2'
                 to='create-product' >
-                <FaMale></FaMale>Add New Product</NavLink>
+                <FaMale></FaMale>Add Product</NavLink>
         </li>
 
         <li >
