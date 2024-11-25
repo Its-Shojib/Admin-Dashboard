@@ -2,7 +2,7 @@
 
 const Header = () => {
     return (
-        <div>
+        <div className="flex fixed top-0 items-center">
             <p>Hi! I am Header </p>
         </div>
     );
