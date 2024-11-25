@@ -6,6 +6,11 @@ const router = createBrowserRouter([
       path: "/",
       element: <Layout />,
     },
+    {
+        path: "/dashboard",
+        element: <Layout />,
+      
+    }
   ]);
 
 export default router;
