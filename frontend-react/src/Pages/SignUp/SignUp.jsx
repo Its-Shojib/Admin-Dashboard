@@ -23,7 +23,7 @@ const SignUp = () => {
                 name: data?.name,
                 email: data?.email,
                 password: data?.password,
-                password_confirmation: data?.password,
+                user_role: false
             };
     
             console.log(user);

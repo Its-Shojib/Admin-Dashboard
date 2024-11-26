@@ -6,6 +6,7 @@ import Contact from "../Pages/Contact/Contact";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
+import PrivateRoutes from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Home />,
+                element: <PrivateRoutes><Home /></PrivateRoutes>,
             },
             {
                 path: "/products",
