@@ -22,7 +22,7 @@ const Dashboard = () => {
 
         <li >
             <NavLink className='flex items-center font-bold gap-2'
-                to='manage-user' >
+                to='manage-users' >
                 <FaUsers></FaUsers>Manage User</NavLink>
         </li>
 
