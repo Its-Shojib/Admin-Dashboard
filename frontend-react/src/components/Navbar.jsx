@@ -10,7 +10,7 @@ const Navbar = () => {
         <li><NavLink to={'/dashboard'}>Dashboard</NavLink></li>
     </>
     return (
-        <div className="navbar z-10 bg-[#2c6792] w-full text-white">
+        <div className="navbar z-10 bg-[#2c6792] w-full text-white rounded-3xl">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -29,11 +29,12 @@ const Navbar = () => {
                     </div>
                     <ul
                         tabIndex={0}
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                        className="menu menu-sm dropdown-content bg-gray-400 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                         {links}
                     </ul>
                 </div>
-                <button className="text-white text-3xl"><span className="text-rose-900">Mini</span>Bazaar</button>
+                <img className="w-10 h-10 rounded-full" src="../../public/logo.png" alt="logo" />
+                <button className="text-white md:text-2xl"><span className="text-rose-900">Mini</span>Bazaar</button>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
