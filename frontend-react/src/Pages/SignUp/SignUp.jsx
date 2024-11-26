@@ -66,8 +66,6 @@ const SignUp = () => {
         }
     };
 
-
-
     return (
         <div>
             <SectionTitle title={'Signup Now'} subtitle={'New user?'} />
