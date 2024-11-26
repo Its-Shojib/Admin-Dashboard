@@ -1,4 +1,4 @@
-import { NavLink } from "react-router"
+import { Link, NavLink } from "react-router"
 
 const Navbar = () => {
     let user = false;
@@ -94,7 +94,7 @@ const Navbar = () => {
                                 <li><a>Logout</a></li>
                             </ul>
                         </div>
-                    </div>: <button className="bg-teal-950 text-white rounded-lg p-2">Login Now</button>
+                    </div>: <Link to={'/login'} className="bg-teal-950 text-white rounded-lg p-2">Login Now</Link>
                 }
             </div>
         </div>

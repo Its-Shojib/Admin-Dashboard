@@ -3,11 +3,10 @@ import { RiLockPasswordFill } from 'react-icons/ri';
 import { useState } from "react";
 import { FaEyeSlash, FaEye } from 'react-icons/fa';
 import Swal from 'sweetalert2';
-import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
-import Logout from '../../Components/Logout';
+import SectionTitle from '../../components/SectionTitle';
 
 
 const Login = () => {
@@ -53,14 +52,10 @@ const Login = () => {
 
     return (
         <div className='w-full mx-auto'>
-            <Helmet>
-                <title>Mission | Login</title>
-            </Helmet>
-            <Logout></Logout>
+            <SectionTitle title={'Login Now'} subtitle={'browse more?'}></SectionTitle>
 
-            <div className="flex px-2 justify-center items-center min-h-screen">
+            <div className="flex px-2 justify-center items-center">
                 <div className="bg-gray-400 w-full md:w-4/12 md:pr-10 text-center p-10 mb-2 rounded-lg">
-                    <h2 className="text-3xl text-base-100 font-bold">Login Now!</h2>
                     <form onSubmit={handleLogin}>
                         <div className="relative">
                             <p className="text-left text-base-100 text-lg font-semibold">User Email</p>
