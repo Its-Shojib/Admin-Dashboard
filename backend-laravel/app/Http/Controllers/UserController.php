@@ -90,4 +90,23 @@ class UserController extends Controller
             ], 500); 
         }
     }
+
+    //check admin or not
+    function checkAdmin($email){
+        
+            $user = User::where('email', $email)->first();
+        
+            if($user && $user->user_role == 1){
+                return response()->json([
+                    "result" => true,
+                    'message' => 'User is an admin',
+                ], 200);
+            }else{
+                return response()->json([
+                    "result" => false,
+                    'message' => 'User is not an admin',
+                ], 200);
+            }
+
+    }
 }

@@ -1,17 +1,22 @@
 import { Link, NavLink } from "react-router"
 import useAuth from "../Hooks/useAuth";
+import useAdmin from "../Hooks/useAdmin";
 
 const Navbar = () => {
     let {user} = useAuth();
+    let [isAdmin] = useAdmin();
+    console.log(isAdmin)
     const links = <>
         <li><NavLink to={'/'}>Home</NavLink></li>
         <li><NavLink to={'/products'}>Products</NavLink></li>
         <li><NavLink to={'/about'}>About</NavLink></li>
         <li><NavLink to={'/contact'}>Contact</NavLink></li>
-        <li><NavLink to={'/dashboard'}>Dashboard</NavLink></li>
+        {
+            isAdmin && <li><NavLink to={'/dashboard'}>Dashboard</NavLink></li>
+        }
     </>
     return (
-        <div className="navbar z-10 bg-[#2c6792] w-full text-white rounded-3xl">
+        <div className="navbar z-10 bg-[#14354d] w-full text-white rounded-3xl">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
