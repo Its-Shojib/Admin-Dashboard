@@ -55,7 +55,7 @@ const ManageUsers = () => {
         {
             field: 'user_role',
             headerName: 'User Role',
-            width: 80,
+            width: 90,
             editable: false,
             sortable: true,
         },
@@ -64,6 +64,8 @@ const ManageUsers = () => {
     const rows = users?.map((user, index) => ({
         ...user, index: index + 1
     }));
+
+
     return (
         <div className='w-full md:w-11/12 mx-auto'>
 
