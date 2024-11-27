@@ -4,7 +4,7 @@ import img from '../../public/logo.png'
 const Footer = () => {
 
     return (
-        <div className='mt-20'>
+        <div className=''>
             <footer className="footer px-10 py-2 bg-[#14354d] text-white">
                 <aside className="items-center grid-flow-col">
                     <img className='w-16 h-16' src={img} alt="" />

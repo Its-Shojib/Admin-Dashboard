@@ -1,7 +1,9 @@
 import { NavLink, Outlet } from 'react-router-dom';
-import {   FaHome,  FaMale, FaUsers } from 'react-icons/fa';
+import { FaGifts, FaHome, FaUsers } from 'react-icons/fa';
 import { VscThreeBars } from "react-icons/vsc";
 import useAdmin from '../Hooks/useAdmin';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const Dashboard = () => {
 
@@ -16,8 +18,8 @@ const Dashboard = () => {
         </li>
         <li >
             <NavLink className='flex items-center font-bold gap-2'
-                to='create-product' >
-                <FaMale></FaMale>Add Product</NavLink>
+                to='add-product' >
+                <FaGifts></FaGifts>Add Product</NavLink>
         </li>
 
         <li >
@@ -30,6 +32,7 @@ const Dashboard = () => {
 
     return (
         <div className='max-w-screen-2xl mx-auto min-h-screen sm:px-4 md:px-0 bg-base-300'>
+            <Navbar />
             <div className="max-w-full mx-auto flex">
 
                 {/* This is for Small device */}
@@ -74,6 +77,7 @@ const Dashboard = () => {
                 </div>
 
             </div>
+            <Footer />
         </div>
     )
 }

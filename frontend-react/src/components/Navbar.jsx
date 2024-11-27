@@ -1,19 +1,18 @@
 import { Link, NavLink } from "react-router"
 import useAuth from "../Hooks/useAuth";
 import useAdmin from "../Hooks/useAdmin";
+import useLogout from "../Hooks/useLogout";
 
 const Navbar = () => {
-    let {user} = useAuth();
+    let { user } = useAuth();
     let [isAdmin] = useAdmin();
-    console.log(isAdmin)
+    let { logout } = useLogout();
     const links = <>
         <li><NavLink to={'/'}>Home</NavLink></li>
         <li><NavLink to={'/products'}>Products</NavLink></li>
         <li><NavLink to={'/about'}>About</NavLink></li>
         <li><NavLink to={'/contact'}>Contact</NavLink></li>
-        {
-            isAdmin && <li><NavLink to={'/dashboard/admin-home'}>Dashboard</NavLink></li>
-        }
+
     </>
     return (
         <div className="navbar z-10 bg-[#14354d] w-full text-white">
@@ -96,11 +95,13 @@ const Navbar = () => {
                                         Profile
                                     </a>
                                 </li>
-                                <li><a>Settings</a></li>
-                                <li><a>Logout</a></li>
+                                {
+                                    isAdmin && <li><Link to={'/dashboard/admin-home'}>Dashboard</Link></li>
+                                }
+                                <li><button onClick={() => logout()}>Logout</button></li>
                             </ul>
                         </div>
-                    </div>: <Link to={'/login'} className="bg-teal-950 text-white rounded-lg p-2">Login Now</Link>
+                    </div> : <Link to={'/login'} className="bg-teal-950 text-white rounded-lg p-2">Login Now</Link>
                 }
             </div>
         </div>

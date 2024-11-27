@@ -11,6 +11,7 @@ import Dashboard from "../Layout/Dashboard";
 import AdminHome from "../Pages/Admin-Home/AdminHome";
 import ManageUsers from "../Pages/Manage-Users/ManageUsers";
 import AdminRoute from "./AdminRoute";
+import AddProducts from "../Pages/Add-Products/AddProducts";
 
 const router = createBrowserRouter([
     {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
             {
                 path: "manage-users",
                 element: <AdminRoute><ManageUsers /></AdminRoute>
+            },
+            {
+                path: "add-product",
+                element: <AdminRoute><AddProducts /></AdminRoute>
             }
         ]
 
