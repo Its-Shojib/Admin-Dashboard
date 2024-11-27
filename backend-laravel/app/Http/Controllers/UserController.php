@@ -109,4 +109,12 @@ class UserController extends Controller
             }
 
     }
+
+    function loadAllUsers(){
+        $users = User::all();
+        return response()->json([
+            "result" => true,
+            'users' => $users,
+        ], 200);
+    }
 }

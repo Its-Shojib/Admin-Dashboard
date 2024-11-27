@@ -10,7 +10,9 @@ Route::post('/signup', [UserController::class, 'signup']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/admin/{email}', [UserController::class, 'checkAdmin']);
-
-    //load all user
-    Route::get('/users', [UserController::class, 'loadAllUsers']);
+    
 });
+Route::middleware(['admin'])->group(function () {
+    Route::get('/admin-home/users', [UserController::class, 'loadAllUsers']);
+});
+
