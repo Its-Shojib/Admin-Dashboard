@@ -30,7 +30,7 @@ const useAxiosPrivate = () => {
             console.log(status)
             if (status === 401 || status === 403) {
                 logout(); 
-                navigate("/login");
+                navigate("/");
             }
             return Promise.reject(error);
         }

@@ -35,7 +35,7 @@ class AdminCheck
         // Verify the user with the email is an admin
         $user = User::where('email', $email)->first();
 
-        if (!$user || $user->user_role != 1) { // Adjust 'user_role' based on your database schema
+        if (!$user || $user->user_role != 1) { 
             return response()->json(['message' => 'Unauthorized. User is not an admin.'], 403);
         }
 
