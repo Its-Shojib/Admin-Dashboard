@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import useLogout from "./useLogout";
 
 const axiosPrivate = axios.create({
@@ -7,7 +6,6 @@ const axiosPrivate = axios.create({
 });
 
 const useAxiosPrivate = () => {
-    const navigate = useNavigate();
     const { logout } = useLogout();
 
     axiosPrivate.interceptors.request.use(
@@ -29,8 +27,7 @@ const useAxiosPrivate = () => {
             const status = error?.response?.status;
             console.log(status)
             if (status === 401 || status === 403) {
-                logout(); 
-                navigate("/");
+                logout();
             }
             return Promise.reject(error);
         }
