@@ -51,7 +51,6 @@ const UpdateProduct = () => {
                 details,
             };
 
-            // Send PUT request to update product
             const res = await axiosPrivate.put(`/api/products/${data.product.id}`,
                 updatedProduct
             );

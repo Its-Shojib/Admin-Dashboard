@@ -5,10 +5,12 @@ import Footer from "../components/Footer";
 
 const Layout = () => {
     return (
-        <div className="w-full px-2 md:px-0 mx-auto">
+        <div className="w-full px-2 md:px-0 mx-auto relative">
             <Navbar />
-            <Outlet />
-            <div className="absolute bottom-0 w-full"><Footer /></div>
+            <div className="min-h-[calc(100vh-154px)]">
+                <Outlet />
+            </div>
+            <Footer />
         </div>
     );
 };

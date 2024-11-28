@@ -8,6 +8,9 @@ Route::post('/login', [UserController::class, 'login']);
 Route::post('/signup', [UserController::class, 'signup']);
 Route::get('/product/{id}', [ProductController::class, 'getProduct']);
 
+// all product page
+Route::get('/products', [ProductController::class, 'getAllProducts']);
+
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/admin/{email}', [UserController::class, 'checkAdmin']);
     Route::post('/new-products', [ProductController::class, 'addNewProduct']);
