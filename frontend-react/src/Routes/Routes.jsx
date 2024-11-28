@@ -12,6 +12,7 @@ import AdminHome from "../Pages/Admin-Home/AdminHome";
 import ManageUsers from "../Pages/Manage-Users/ManageUsers";
 import AdminRoute from "./AdminRoute";
 import AddProducts from "../Pages/Add-Products/AddProducts";
+import ManageProducts from "../Pages/Manage-Products/ManageProducts";
 
 const router = createBrowserRouter([
     {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
             {
                 path: "add-product",
                 element: <AdminRoute><AddProducts /></AdminRoute>
+            },
+            {
+                path: "manage-products",
+                element: <AdminRoute><ManageProducts /></AdminRoute>
             }
         ]
 

@@ -8,6 +8,7 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 
 const AddProducts = () => {
 
+    
     let axiosPrivate = useAxiosPrivate();
     const handleAddProduct = async (e) => {
         e.preventDefault();

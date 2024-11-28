@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from 'react-router-dom';
-import { FaGifts, FaHome, FaUsers } from 'react-icons/fa';
+import { FaGifts, FaHome, FaRProject, FaUsers } from 'react-icons/fa';
 import { VscThreeBars } from "react-icons/vsc";
 import useAdmin from '../Hooks/useAdmin';
 import Navbar from '../components/Navbar';
@@ -20,6 +20,11 @@ const Dashboard = () => {
             <NavLink className='flex items-center font-bold gap-2'
                 to='add-product' >
                 <FaGifts></FaGifts>Add Product</NavLink>
+        </li>
+        <li >
+            <NavLink className='flex items-center font-bold gap-2'
+                to='manage-products' >
+                <FaRProject></FaRProject>Manage Product</NavLink>
         </li>
 
         <li >

@@ -52,4 +52,59 @@ class ProductController extends Controller
         
         }
     }
+
+    // get all products
+    function getAllProducts(){
+        $products = Products::all();
+        return response()->json([
+            'result' => true,
+            'products' => $products,
+        ], 200);
+    }
+    //delete single product
+    function deleteProduct($id){
+        try {
+            $product = Products::find($id);
+            if (!$product) {
+                return response()->json([
+                   'result' => false,
+                   'message' => 'Product not found',
+                ], 404);
+            }
+            Products::destroy($id);
+            return response()->json([
+               'result' => true,
+               'message' => 'Product deleted successfully',
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+               'result' => false,
+               'message' => 'An error occurred while deleting the product',
+               'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    //get a single product
+    function getProduct($id){
+        try {
+            $product = Products::find($id);
+            if (!$product) {
+                return response()->json([
+                   'result' => false,
+                   'message' => 'Product not found',
+                ], 404);
+            }
+            return response()->json([
+               'result' => true,
+               'product' => $product,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+               'result' => false,
+               'message' => 'An error occurred while getting the product',
+               'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }
