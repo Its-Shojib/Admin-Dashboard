@@ -107,4 +107,53 @@ class ProductController extends Controller
             ], 500);
         }
     }
+
+    //update single product
+    function updateProduct($id, Request $request){
+        try {
+            $request->validate([
+                'name' => 'required|string|max:50|min:3',
+                'category'=> 'required|string',
+                'color'=> 'required|string',
+                'brand'=> 'required|string',
+                'price'=> 'required|numeric|min:0',
+                'image'=> 'required|string',
+                'details'=> 'required|string',
+            ]);
+
+            $product = Products::find($id);
+            if (!$product) {
+                return response()->json([
+                   'result' => false,
+                   'message' => 'Product not found',
+                ], 404);
+            }
+            $product->name = $request->name;
+            $product->category = $request->category;
+            $product->color = $request->color;
+            $product->brand = $request->brand;
+            $product->price = $request->price;
+            $product->image = $request->image;
+            $product->details = $request->details;
+            $product->save();
+            return response()->json([
+               'result' => true,
+               'message' => 'Product updated successfully',
+               'product' => $product,
+            ], 200);
+
+        } catch (ValidationException $e) {
+            return response()->json([
+                'result' => false,
+                'message' => 'Validation error',
+                'errors' => $e->errors(),
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+               'result' => false,
+               'message' => 'An error occurred while updating the product',
+               'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }

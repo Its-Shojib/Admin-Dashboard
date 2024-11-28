@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import SectionTitle from "../../components/SectionTitle";
 import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
 import UseLoadProducts from "../../Hooks/useLoadProducts";
@@ -6,6 +7,7 @@ import Swal from "sweetalert2";
 const ManageProducts = () => {
     const [products, productPending, refetch] = UseLoadProducts();
     let axiosPrivate = useAxiosPrivate();
+    let navidate = useNavigate();
 
 
     const handleDelete = async (id) => {
@@ -41,10 +43,6 @@ const ManageProducts = () => {
         });
     };
 
-    const handleEdit = (id) => {
-        console.log("Edit product with ID:", id);
-    };
-
     return (
         <div className="w-full px-4">
 
@@ -70,30 +68,30 @@ const ManageProducts = () => {
                         </thead>
                         <tbody>
                             {products.map((product, index) => (
-                                <tr key={product.id} className="hover:bg-gray-50">
+                                <tr key={product?.id} className="hover:bg-gray-50">
                                     <td className=" p-2">{index + 1}</td>
                                     <td className=" p-2">
                                         <img
-                                            src={product.image}
-                                            alt={product.name}
+                                            src={product?.image}
+                                            alt={product?.name}
                                             className="w-16 h-16 object-cover rounded-full"
                                         />
                                     </td>
-                                    <td className=" p-2">{product.name}</td>
-                                    <td className=" p-2">{product.category}</td>
-                                    <td className=" p-2">{product.price}</td>
-                                    <td className=" p-2">{product.color}</td>
-                                    <td className=" p-2">{product.brand}</td>
+                                    <td className=" p-2">{product?.name}</td>
+                                    <td className=" p-2">{product?.category}</td>
+                                    <td className=" p-2">{product?.price}</td>
+                                    <td className=" p-2">{product?.color}</td>
+                                    <td className=" p-2">{product?.brand}</td>
                                     <td className=" p-2">
                                         <button
                                             className="bg-blue-500 text-white px-4 py-1 rounded mr-2"
-                                            onClick={() => handleEdit(product.id)}
+                                            onClick={() => navidate(`/dashboard/update-product/${product?.id}`)}
                                         >
                                             Edit
                                         </button>
                                         <button
                                             className="bg-red-500 text-white px-4 py-1 rounded"
-                                            onClick={() => handleDelete(product.id)}
+                                            onClick={() => handleDelete(product?.id)}
                                         >
                                             Delete
                                         </button>

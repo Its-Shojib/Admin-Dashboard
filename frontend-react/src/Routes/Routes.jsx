@@ -13,6 +13,7 @@ import ManageUsers from "../Pages/Manage-Users/ManageUsers";
 import AdminRoute from "./AdminRoute";
 import AddProducts from "../Pages/Add-Products/AddProducts";
 import ManageProducts from "../Pages/Manage-Products/ManageProducts";
+import UpdateProduct from "../Pages/Update-Products/UpdateProduct";
 
 const router = createBrowserRouter([
     {
@@ -64,6 +65,11 @@ const router = createBrowserRouter([
             {
                 path: "manage-products",
                 element: <AdminRoute><ManageProducts /></AdminRoute>
+            },
+            {
+                path: "update-product/:id",
+                element: <AdminRoute><UpdateProduct /></AdminRoute>,
+                loader: ({params})=> fetch(`http://127.0.0.1:8000/api/product/${params.id}`)
             }
         ]
 

@@ -6,7 +6,7 @@ use App\Http\Controllers\ProductController;
 
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/signup', [UserController::class, 'signup']);
-
+Route::get('/product/{id}', [ProductController::class, 'getProduct']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/admin/{email}', [UserController::class, 'checkAdmin']);
@@ -15,11 +15,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     //delete single product
     Route::delete('/product/{id}', [ProductController::class, 'deleteProduct']);
 
-    //load the product to update product page
-    Route::get('/product/{id}', [ProductController::class, 'getProduct']);
     //update single product
     Route::put('/products/{id}', [ProductController::class, 'updateProduct']);
-    
 });
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin-home/users', [UserController::class, 'loadAllUsers']);
