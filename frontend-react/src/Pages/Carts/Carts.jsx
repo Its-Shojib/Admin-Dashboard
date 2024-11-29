@@ -6,8 +6,6 @@ import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
 const CartPage = () => {
     const [carts, cartsPending, refetch] = useCarts();
     const [cart, setCart] = useState([]);
-    console.log(cart)
-
     let axiosPrivate = useAxiosPrivate();
 
     const deleteCart = async (id) => {
