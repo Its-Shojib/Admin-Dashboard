@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
 import UseLoadP from "../../Hooks/useLoadP";
+import useAuth from "../../Hooks/useAuth";
+import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
+import Swal from 'sweetalert2'
+import 'animate.css';
 
 const Products = () => {
     const [products, productPending] = UseLoadP();
@@ -8,6 +12,8 @@ const Products = () => {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [priceRange, setPriceRange] = useState({ min: 0, max: Infinity });
     const [selectedColor, setSelectedColor] = useState("");
+    let {user} = useAuth();
+    let axiosPrivate = useAxiosPrivate();
 
     useEffect(() => {
         if (!productPending) {
@@ -43,6 +49,52 @@ const Products = () => {
 
     if (productPending) {
         return <p>Loading products...</p>;
+    }
+
+    const handleAddtoCart =async (id)=>{
+        let cart = {
+            productId: id,
+            email:user?.email
+        }
+        let res = await axiosPrivate.post('/api/add-to-cart', cart);
+        console.log(res);
+        if(res.data.result){
+            Swal.fire({
+                title: "Product added successfully",
+                showClass: {
+                  popup: `
+                    animate__animated
+                    animate__fadeInUp
+                    animate__faster
+                  `
+                },
+                hideClass: {
+                  popup: `
+                    animate__animated
+                    animate__fadeOutDown
+                    animate__faster
+                  `
+                }
+              });
+        }else{
+            Swal.fire({
+                title: "Product already exist in carts",
+                showClass: {
+                  popup: `
+                    animate__animated
+                    animate__fadeInUp
+                    animate__faster
+                  `
+                },
+                hideClass: {
+                  popup: `
+                    animate__animated
+                    animate__fadeOutDown
+                    animate__faster
+                  `
+                }
+              });
+        }
     }
 
     return (
@@ -171,7 +223,7 @@ const Products = () => {
                                             <button className="btn btn-primary">
                                                 View Details
                                             </button>
-                                            <button className="btn btn-secondary">
+                                            <button onClick={()=>handleAddtoCart(product.id)} className="btn btn-secondary">
                                                 Add to Cart
                                             </button>
                                         </div>

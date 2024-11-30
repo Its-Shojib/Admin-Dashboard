@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
@@ -20,6 +21,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     //update single product
     Route::put('/products/{id}', [ProductController::class, 'updateProduct']);
+
+
+    //add to cart
+    Route::post('/add-to-cart', [CartsController::class, 'addProductToCart']);
 });
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin-home/users', [UserController::class, 'loadAllUsers']);
