@@ -26,7 +26,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/products",
-                element: <Products />,
+                element: <PrivateRoutes><Products /></PrivateRoutes>,
             },
             {
                 path: "/about",
@@ -69,7 +69,7 @@ const router = createBrowserRouter([
             {
                 path: "update-product/:id",
                 element: <AdminRoute><UpdateProduct /></AdminRoute>,
-                loader: ({params})=> fetch(`http://127.0.0.1:8000/api/product/${params.id}`)
+                loader: ({ params }) => fetch(`http://127.0.0.1:8000/api/product/${params.id}`)
             }
         ]
 
