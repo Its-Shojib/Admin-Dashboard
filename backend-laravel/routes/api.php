@@ -25,6 +25,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     //add to cart
     Route::post('/add-to-cart', [CartsController::class, 'addProductToCart']);
+    //fetch carts
+    Route::get('/carts/{email}', [CartsController::class, 'fetchCartItemsByEmail']);
 });
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin-home/users', [UserController::class, 'loadAllUsers']);

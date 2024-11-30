@@ -13,7 +13,6 @@ class CartsController extends Controller
         try {
             $productId = $request->productId;
             $email = $request->email;
-            echo $email;
 
             $existingCart = Carts::where('productId', $productId)
                                   ->where('email', $email)
@@ -45,17 +44,16 @@ class CartsController extends Controller
         }
     }
 
-    public function fetchCartItemsByEmail(Request $request)
+    public function fetchCartItemsByEmail($email)
     {
         try {
-            $email = $request->email;
             $cartItems = Carts::where('email', $email)->get();
 
             if ($cartItems->isEmpty()) {
                 return response()->json(['message' => 'No items found in the cart for this email'], 200);
             }
 
-            return response()->json(['cartItems' => $cartItems], 200);
+            return response()->json(['carts' => $cartItems], 200);
         } catch (\Exception $e) {
             // Handle exceptions and return error response
             return response()->json(['error' => 'An error occurred while fetching cart items', 'details' => $e->getMessage()], 500);

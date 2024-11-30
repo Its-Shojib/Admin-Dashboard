@@ -4,6 +4,7 @@ import useAuth from "../../Hooks/useAuth";
 import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
 import Swal from 'sweetalert2'
 import 'animate.css';
+import useCarts from "../../Hooks/useCarts";
 
 const Products = () => {
     const [products, productPending] = UseLoadP();
@@ -14,6 +15,7 @@ const Products = () => {
     const [selectedColor, setSelectedColor] = useState("");
     let {user} = useAuth();
     let axiosPrivate = useAxiosPrivate();
+    let [,, refetch] = useCarts();
 
     useEffect(() => {
         if (!productPending) {
@@ -57,8 +59,8 @@ const Products = () => {
             email:user?.email
         }
         let res = await axiosPrivate.post('/api/add-to-cart', cart);
-        console.log(res);
         if(res.data.result){
+            refetch();
             Swal.fire({
                 title: "Product added successfully",
                 showClass: {
@@ -76,6 +78,8 @@ const Products = () => {
                   `
                 }
               });
+
+
         }else{
             Swal.fire({
                 title: "Product already exist in carts",
@@ -94,6 +98,7 @@ const Products = () => {
                   `
                 }
               });
+              refetch();
         }
     }
 
