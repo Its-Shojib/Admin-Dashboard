@@ -5,6 +5,7 @@ import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
 import Swal from 'sweetalert2'
 import 'animate.css';
 import useCarts from "../../Hooks/useCarts";
+import { useNavigate } from "react-router-dom";
 
 const Products = () => {
     const [products, productPending] = UseLoadP();
@@ -16,6 +17,7 @@ const Products = () => {
     let {user} = useAuth();
     let axiosPrivate = useAxiosPrivate();
     let [,, refetch] = useCarts();
+    let navigate = useNavigate();
 
     useEffect(() => {
         if (!productPending) {
@@ -225,7 +227,7 @@ const Products = () => {
                                             Price: ${product.price}
                                         </p>
                                         <div className="card-actions flex justify-center gap-2 mt-4">
-                                            <button className="btn btn-primary">
+                                            <button onClick={()=> navigate(`/product/${product?.id}`)} className="btn btn-primary">
                                                 View Details
                                             </button>
                                             <button onClick={()=>handleAddtoCart(product.id)} className="btn btn-secondary">
