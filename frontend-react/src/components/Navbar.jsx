@@ -9,6 +9,13 @@ const Navbar = () => {
     let [isAdmin] = useAdmin();
     let { logout } = useLogout();
     let [carts] = useCarts();
+
+
+    let totalPrice = carts.reduce((total, item) => {
+        return parseInt(total) + parseInt(item.product.price);
+    }, 0);
+
+
     const links = <>
         <li><NavLink to={'/'}>Home</NavLink></li>
         <li><NavLink to={'/products'}>Products</NavLink></li>
@@ -73,8 +80,8 @@ const Navbar = () => {
                                 tabIndex={0}
                                 className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow">
                                 <div className="card-body">
-                                    <span className="text-lg font-bold">8 Items</span>
-                                    <span className="text-info">Subtotal: $999</span>
+                                    <span className="text-lg font-bold text-black">{carts?.length} Items</span>
+                                    <span className="text-info">Subtotal: ${totalPrice}</span>
                                     <div className="card-actions">
                                         <button className="btn btn-primary btn-block">View cart</button>
                                     </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Carts;
+use App\Models\Products;
 
 class CartsController extends Controller
 {
@@ -15,8 +16,8 @@ class CartsController extends Controller
             $email = $request->email;
 
             $existingCart = Carts::where('productId', $productId)
-                                  ->where('email', $email)
-                                  ->first();
+                ->where('email', $email)
+                ->first();
 
             if ($existingCart) {
                 return response()->json([
@@ -38,9 +39,10 @@ class CartsController extends Controller
         } catch (\Exception $e) {
             // Handle exceptions and return error response
             return response()->json([
-                'result' =>false, 
+                'result' => false,
                 'error' => 'An error occurred while adding the product to the cart',
-                'details' => $e->getMessage()], 500);
+                'details' => $e->getMessage()
+            ], 500);
         }
     }
 
@@ -49,13 +51,23 @@ class CartsController extends Controller
         try {
             $cartItems = Carts::where('email', $email)->get();
 
+            $cartItems = $cartItems->map(function ($cartItem) {
+                $product = Products::find($cartItem->productId);
+                if ($product) {
+                    return [
+                        'id' => $cartItem->id, 
+                        'product' => $product, 
+                    ];
+                }
+                return null;
+            })->filter();
+
             if ($cartItems->isEmpty()) {
                 return response()->json(['message' => 'No items found in the cart for this email'], 200);
             }
 
             return response()->json(['carts' => $cartItems], 200);
         } catch (\Exception $e) {
-            // Handle exceptions and return error response
             return response()->json(['error' => 'An error occurred while fetching cart items', 'details' => $e->getMessage()], 500);
         }
     }
