@@ -15,6 +15,7 @@ import AddProducts from "../Pages/Add-Products/AddProducts";
 import ManageProducts from "../Pages/Manage-Products/ManageProducts";
 import UpdateProduct from "../Pages/Update-Products/UpdateProduct";
 import SingleProduct from "../Pages/SingleProducts/SingleProduct";
+import Carts from "../Pages/Carts/Carts";
 
 const router = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
             {
                 path: "/about",
                 element: <About />,
+            },
+            {
+                path: "/carts",
+                element: <PrivateRoutes><Carts/></PrivateRoutes>,
             },
             {
                 path: "/contact",
