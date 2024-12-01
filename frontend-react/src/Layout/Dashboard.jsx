@@ -36,7 +36,7 @@ const Dashboard = () => {
     </>
 
     return (
-        <div className='max-w-screen-2xl mx-auto min-h-screen sm:px-4 md:px-0 bg-base-300'>
+        <div className='w-full mx-auto min-h-screen sm:px-4 md:px-0 bg-base-300'>
             <Navbar />
             <div className="max-w-full mx-auto flex">
 
