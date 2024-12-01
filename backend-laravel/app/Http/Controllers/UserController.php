@@ -117,4 +117,20 @@ class UserController extends Controller
             'users' => $users,
         ], 200);
     }
+
+    //load single user
+    function getProfile($id){
+        $user = User::where('id', $id)->first();
+        if($user){
+            return response()->json([
+                "result" => true,
+                'user' => $user,
+            ], 200);
+        }else{
+            return response()->json([
+                "result" => false,
+               'message' => 'User not found',
+            ], 400);
+        }
+    }
 }

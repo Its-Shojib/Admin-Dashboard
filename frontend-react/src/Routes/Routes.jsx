@@ -16,6 +16,7 @@ import ManageProducts from "../Pages/Manage-Products/ManageProducts";
 import UpdateProduct from "../Pages/Update-Products/UpdateProduct";
 import SingleProduct from "../Pages/SingleProducts/SingleProduct";
 import Carts from "../Pages/Carts/Carts";
+import Profile from "../Pages/Profile/Profile";
 
 const router = createBrowserRouter([
     {
@@ -29,6 +30,11 @@ const router = createBrowserRouter([
             {
                 path: "/products",
                 element: <PrivateRoutes><Products /></PrivateRoutes>,
+            },
+            {
+                path: "/profile/:id",
+                element: <PrivateRoutes><Profile /></PrivateRoutes>,
+                loader: ({ params }) => fetch(`http://127.0.0.1:8000/api/profile/${params.id}`)
             },
             {
                 path: "/product/:id",

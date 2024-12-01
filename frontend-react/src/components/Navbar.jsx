@@ -100,9 +100,9 @@ const Navbar = () => {
                                 tabIndex={0}
                                 className="menu menu-sm dropdown-content bg-gray-400 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                                 <li>
-                                    <a className="justify-between">
+                                    <Link to={`/profile/${user?.id}`} className="justify-between">
                                         Profile
-                                    </a>
+                                    </Link>
                                 </li>
                                 {
                                     isAdmin && <li><Link to={'/dashboard/admin-home'}>Dashboard</Link></li>

@@ -8,6 +8,8 @@ use App\Http\Controllers\ProductController;
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/signup', [UserController::class, 'signup']);
 Route::get('/product/{id}', [ProductController::class, 'getProduct']);
+//profile section
+Route::get('/profile/{email}', [UserController::class, 'getProfile']);
 
 // all product page
 Route::get('/products', [ProductController::class, 'getAllProducts']);
@@ -27,6 +29,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/add-to-cart', [CartsController::class, 'addProductToCart']);
     //fetch carts
     Route::get('/carts/{email}', [CartsController::class, 'fetchCartItemsByEmail']);
+
+    
 });
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin-home/users', [UserController::class, 'loadAllUsers']);

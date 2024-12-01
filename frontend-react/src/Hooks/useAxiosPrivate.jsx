@@ -1,12 +1,11 @@
 import axios from "axios";
-import useLogout from "./useLogout";
 
 const axiosPrivate = axios.create({
     baseURL: "http://127.0.0.1:8000"
 });
 
 const useAxiosPrivate = () => {
-    const { logout } = useLogout();
+
 
     axiosPrivate.interceptors.request.use(
         (config) => {
@@ -25,7 +24,7 @@ const useAxiosPrivate = () => {
         async (error) => {
             const status = error?.response?.status;
             if (status === 401 || status === 403) {
-                logout();
+                console.log(error)
             }
             return Promise.reject(error);
         }
