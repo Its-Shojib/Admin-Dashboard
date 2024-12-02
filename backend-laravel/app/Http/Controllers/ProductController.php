@@ -156,4 +156,15 @@ class ProductController extends Controller
             ], 500);
         }
     }
+
+    function getPaginatedProducts($page){
+        $productsPerPage = 6;
+        $skip = ($page - 1) * $productsPerPage;
+        $products = Products::skip($skip)->take($productsPerPage)->get();
+        return response()->json([
+            'result' => true,
+            'products' => $products,
+            'total_pages' => ceil(Products::count() / $productsPerPage),
+        ], 200);
+    }
 }

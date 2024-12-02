@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react";
-import UseLoadP from "../../Hooks/useLoadP";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
 import Swal from 'sweetalert2'
 import 'animate.css';
 import useCarts from "../../Hooks/useCarts";
 import { useNavigate } from "react-router-dom";
+import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const Products = () => {
-    const [products, productPending] = UseLoadP();
+    const [active, setActive] = useState(1);
+    const [totalPage, setTotalPage] = useState(null);
+
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("");
@@ -18,10 +22,20 @@ const Products = () => {
     let axiosPrivate = useAxiosPrivate();
     let [, , refetch] = useCarts();
     let navigate = useNavigate();
+    let axiosPublic = useAxiosPublic();
+
+    const { data: productsFetch = [], isPending: productPending, refetch:productRefetch } = useQuery({
+        queryKey: ['productsFetch'],
+        queryFn: async () => {
+            const res = await axiosPublic.get(`/api/products/paginate/${active}`);
+            setTotalPage(res.data.total_pages)
+            return res.data.products;
+        }
+    })
 
     useEffect(() => {
         if (!productPending) {
-            let filtered = products;
+            let filtered = productsFetch;
 
             // Filter by search query
             if (searchQuery) {
@@ -49,7 +63,21 @@ const Products = () => {
 
             setFilteredProducts(filtered);
         }
-    }, [products, searchQuery, selectedCategory, priceRange, selectedColor, productPending]);
+    }, [productsFetch, searchQuery, selectedCategory, priceRange, selectedColor, productPending]);
+
+    const next = () => {
+        if (active === totalPage) return;
+        setActive(active + 1);
+        productRefetch();
+    };
+    const prev = () => {
+        if (active === 1) return;
+        setActive(active - 1);
+        productRefetch();
+    };
+    useEffect(() => {
+        productRefetch()
+    }, [active, productRefetch])
 
 
     const handleAddtoCart = async (id) => {
@@ -202,22 +230,22 @@ const Products = () => {
 
                     {/* Right Side: Products */}
                     <div className="col-span-3">
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:min-h-[700px]">
                             {filteredProducts.length > 0 ? (
                                 filteredProducts.map((product) => (
                                     <div
                                         key={product.id}
-                                        className="card bg-base-100 w-full shadow-xl"
+                                        className="card bg-base-100 w-full shadow-xl max-h-[320px] p-5"
                                     >
-                                        <figure className="px-10 pt-10">
+                                        <figure className="px-10 pt-5">
                                             <img
                                                 src={product.image}
                                                 alt={product.name}
-                                                className="rounded-xl w-full h-48 object-cover"
+                                                className="rounded-xl w-full h-72 object-cover"
                                             />
                                         </figure>
-                                        <div className="card-body items-center text-center">
-                                            <h2 className="card-title text-lg font-semibold">
+                                        <div className="items-center text-center">
+                                            <h2 className=" text-center text-lg font-semibold">
                                                 {product.name}
                                             </h2>
                                             <p className="text-sm text-gray-600">
@@ -243,7 +271,28 @@ const Products = () => {
                                 </p>
                             )}
                         </div>
+                        <div className="flex justify-center items-center mt-5">
+                            <div className="flex items-center gap-8 text=lg">
+                                <button className="text-xl"
+                                    onClick={prev}
+                                    disabled={active === 1}
+                                >
+                                    <FaArrowAltCircleLeft className="h-8 w-8" />
+                                </button>
+                                <p color="gray" className="font-normal">
+                                    Page <strong className="text-gray-900 text-xl">{active}</strong> of{" "}
+                                    <strong className="text-gray-900 text-xl">{totalPage}</strong>
+                                </p>
+                                <button className="text-xl"
+                                    onClick={next}
+                                    disabled={active === totalPage}
+                                >
+                                    <FaArrowAltCircleRight className="h-8 w-8" />
+                                </button>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             }
 
