@@ -77,7 +77,7 @@ class CartsController extends Controller
         try {
             $cartItem = Carts::find($id);
             if (!$cartItem) {
-                return response()->json(['message' => 'Cart item not found'], 404);
+                return response()->json(['message' => 'Cart item not found'], 400);
             }
             $cartItem->delete();
             return response()->json(['message' => 'Cart item deleted successfully'], 200);

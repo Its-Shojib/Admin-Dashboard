@@ -23,12 +23,12 @@ const ManageUsers = () => {
         {
             field: 'index',
             headerName: 'Index',
-            width: 70
+            width: 80
         },
         {
             field: 'id',
             headerName: 'ID',
-            width: 70
+            width: 80
         },
         {
             field: 'name',
@@ -47,18 +47,20 @@ const ManageUsers = () => {
         {
             field: 'created_at',
             headerName: 'Created_at',
-            width: 250,
+            width: 280,
             editable: false,
             sortable: true,
         },
-
         {
-            field: 'user_role',
-            headerName: 'User Role',
-            width: 90,
+            field: "user_role",
+            headerName: "User Role",
+            width: 120,
             editable: false,
             sortable: true,
-        },
+            valueGetter: (params) => {
+                return params == 1 ? "Admin" : params == 0 ? "General User" : "Unknown";
+              }, 
+          },
     ];
 
     const rows = users?.map((user, index) => ({
