@@ -6,6 +6,7 @@ import { DataGrid } from '@mui/x-data-grid';
 const ManageUsers = () => {
     const [users, userPending] = UseLoadUsers();
 
+
     {
         users?.map((user, index) => {
             return {
@@ -67,7 +68,6 @@ const ManageUsers = () => {
         ...user, index: index + 1
     }));
 
-
     return (
         <div className='w-full md:w-11/12 mx-auto'>
 
@@ -99,8 +99,6 @@ const ManageUsers = () => {
                             </Box>
                         </div>
                     </div>
-
-
                 </>
             }
         </div>
