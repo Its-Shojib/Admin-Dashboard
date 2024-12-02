@@ -4,6 +4,7 @@ import useAuth from '../../Hooks/useAuth';
 import useCarts from '../../Hooks/useCarts';
 import useAxiosPrivate from '../../Hooks/useAxiosPrivate';
 import Swal from 'sweetalert2';
+import SectionTitle from '../../components/SectionTitle';
 
 const SingleProduct = () => {
     let {user} = useAuth();
@@ -62,35 +63,36 @@ const SingleProduct = () => {
 
     return (
         <div className="w-full md:w-10/12 mx-auto px-4 my-8">
-            <div className="flex flex-col md:flex-row gap-8">
+          <SectionTitle title={product?.product?.name} subtitle={'here is your'}></SectionTitle>
+            <div className="flex flex-col md:flex-row justify-center items-start gap-8">
                 {/* Product Image */}
                 <div className="w-full md:w-1/2">
                     <img
-                        src={product.product.image} // Assuming the photo URL is stored in the product object
-                        alt={product.product.name}
-                        className="w-full rounded-lg shadow-md"
+                        src={product?.product?.image} 
+                        alt={product?.product?.name}
+                        className="w-full rounded-lg shadow-md max-h-[500px]"
                     />
                 </div>
 
                 {/* Product Details */}
                 <div className="w-full md:w-1/2 space-y-4">
-                    <h1 className="text-3xl font-bold">{product.product.name}</h1>
-                    <p className="text-gray-700">{product.product.details}</p>
+                    <h1 className="text-3xl font-bold">{product?.product?.name}</h1>
+                    <p className="text-gray-700">{product?.product?.details}</p>
                     <p className="text-lg font-semibold">
-                        Category: <span className="text-teal-600">{product.product.category}</span>
+                        Category: <span className="text-teal-600">{product?.product?.category}</span>
                     </p>
                     <p className="text-lg font-semibold">
-                        Color: <span className="text-teal-600">{product.product.color}</span>
+                        Color: <span className="text-teal-600">{product?.product?.color}</span>
                     </p>
                     <p className="text-lg font-semibold">
-                        Brand: <span className="text-teal-600">{product.product.brand}</span>
+                        Brand: <span className="text-teal-600">{product?.product?.brand}</span>
                     </p>
-                    <p className="text-2xl font-bold text-teal-700">${product.product.price}</p>
+                    <p className="text-2xl font-bold text-teal-700">${product?.product?.price}</p>
 
                     {/* Add to Cart Button */}
                     <button
                         className="bg-teal-600 text-white px-6 py-2 rounded-md hover:bg-teal-700"
-                        onClick={()=>handleAddtoCart(product.product.id)}
+                        onClick={()=>handleAddtoCart(product?.product?.id)}
                     >
                         Add to Cart
                     </button>

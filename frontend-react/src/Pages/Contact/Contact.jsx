@@ -8,7 +8,7 @@ import SectionTitle from "../../components/SectionTitle";
 const Contact = () => {
     return (
         <div>
-            <SectionTitle title={'Contact Us'} subtitle={'Find Solution?'}/>
+            <SectionTitle title={'Contact Us'} subtitle={'Need Solution?'}/>
 
             <div className="flex flex-col md:flex-row gap-10 items-center justify-center md:w-10/12 mx-auto">
                 <div className="flex-1 text-left space-y-3 pl-10">
