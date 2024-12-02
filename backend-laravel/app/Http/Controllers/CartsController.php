@@ -71,4 +71,18 @@ class CartsController extends Controller
             return response()->json(['error' => 'An error occurred while fetching cart items', 'details' => $e->getMessage()], 500);
         }
     }
+
+    //delete a cart item
+    public function deleteCartItem($id){
+        try {
+            $cartItem = Carts::find($id);
+            if (!$cartItem) {
+                return response()->json(['message' => 'Cart item not found'], 404);
+            }
+            $cartItem->delete();
+            return response()->json(['message' => 'Cart item deleted successfully'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while deleting the cart item', 'details' => $e->getMessage()], 500);
+        }
+    }
 }

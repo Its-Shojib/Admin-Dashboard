@@ -1,9 +1,47 @@
 import { useEffect, useState } from "react";
 import useCarts from "../../Hooks/useCarts";
+import Swal from "sweetalert2";
+import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
 
 const CartPage = () => {
-    const [carts, cartsPending] = useCarts();
+    const [carts, cartsPending, refetch] = useCarts();
     const [cart, setCart] = useState([]);
+    console.log(cart)
+
+    let axiosPrivate = useAxiosPrivate();
+
+    const deleteCart = async (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    let res = await axiosPrivate.delete(`/api/carts/${id}`);
+                    if (res.status === 200) {
+                        Swal.fire(
+                            "Deleted!",
+                            "Item has been deleted.",
+                            "success"
+                        );
+                        refetch();
+                    }
+                } catch (error) {
+                    console.error("Error deleting carts:", error);
+                    Swal.fire(
+                        "Error!",
+                        "An error occurred.",
+                        "error"
+                    );
+                }
+            }
+        });
+    }
 
     useEffect(() => {
         setCart(carts.map((item) => ({ ...item, quantity: 1 })))
@@ -47,7 +85,7 @@ const CartPage = () => {
                                         className="cart-item flex items-center justify-between bg-gray-100 p-4 rounded-lg shadow-sm"
                                     >
                                         {/* Product Image and Details */}
-                                        <div className="flex items-center space-x-4">
+                                        <div className="flex items-center space-x-4 w-[300px]">
                                             <img
                                                 src={item.product.image}
                                                 alt={item.product.name}
@@ -57,6 +95,7 @@ const CartPage = () => {
                                                 <h2 className="text-lg font-semibold">{item.product.name}</h2>
                                                 <p className="text-gray-600">${item?.product?.price}</p>
                                             </div>
+
                                         </div>
 
                                         {/* Quantity Controls */}
@@ -73,6 +112,14 @@ const CartPage = () => {
                                                 className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
                                             >
                                                 +
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <button
+                                                onClick={() => deleteCart(item.id)}
+                                                className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                                            >
+                                                Delete
                                             </button>
                                         </div>
                                     </div>
