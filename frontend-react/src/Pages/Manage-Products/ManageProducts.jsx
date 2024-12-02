@@ -78,7 +78,7 @@ const ManageProducts = () => {
                     <div className="text-center h-screen">
                         <span className="loading loading-spinner loading-lg"></span>
                     </div>
-                ) : <div className="overflow-x-auto min-h-[600px]">
+                ) : <div className="overflow-x-auto min-h-[550px]">
                     <table className="table-auto w-full border-collapse ">
                         <thead>
                             <tr className="bg-gray-100">
