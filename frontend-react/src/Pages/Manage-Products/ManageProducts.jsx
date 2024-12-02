@@ -1,13 +1,39 @@
 import { useNavigate } from "react-router-dom";
 import SectionTitle from "../../components/SectionTitle";
 import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
-import UseLoadProducts from "../../Hooks/useLoadProducts";
 import Swal from "sweetalert2";
+import { useEffect, useState } from "react";
+import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
+import { useQuery } from "@tanstack/react-query";
 
 const ManageProducts = () => {
-    const [products, productPending, refetch] = UseLoadProducts();
+    const [active, setActive] = useState(1);
+    const [totalPage, setTotalPage] = useState(null);
     let axiosPrivate = useAxiosPrivate();
     let navidate = useNavigate();
+
+    const { data: productsFetch = [], isPending, refetch: productRefetch } = useQuery({
+        queryKey: ['products-paginate'],
+        queryFn: async () => {
+            const res = await axiosPrivate.get(`/api/manage-products/paginate/${active}`);
+            setTotalPage(res.data.total_pages)
+            return res.data.products;
+        }
+    })
+
+    const next = () => {
+        if (active === totalPage) return;
+        setActive(active + 1);
+        productRefetch();
+    };
+    const prev = () => {
+        if (active === 1) return;
+        setActive(active - 1);
+        productRefetch();
+    };
+    useEffect(() => {
+        productRefetch()
+    }, [active, productRefetch])
 
 
     const handleDelete = async (id) => {
@@ -29,7 +55,7 @@ const ManageProducts = () => {
                             "Product has been deleted.",
                             "success"
                         );
-                        refetch();
+                        productRefetch();
                     }
                 } catch (error) {
                     console.error("Error deleting product:", error);
@@ -48,11 +74,11 @@ const ManageProducts = () => {
 
             <SectionTitle title={'Manage Products'} subtitle={'need details?'}></SectionTitle>
             {
-                productPending ? (
+                isPending ? (
                     <div className="text-center h-screen">
                         <span className="loading loading-spinner loading-lg"></span>
                     </div>
-                ) : <div className="overflow-x-auto">
+                ) : <div className="overflow-x-auto min-h-[600px]">
                     <table className="table-auto w-full border-collapse ">
                         <thead>
                             <tr className="bg-gray-100">
@@ -67,7 +93,7 @@ const ManageProducts = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {products.map((product, index) => (
+                            {productsFetch?.map((product, index) => (
                                 <tr key={product?.id} className="hover:bg-gray-50">
                                     <td className=" p-2">{index + 1}</td>
                                     <td className=" p-2">
@@ -103,6 +129,26 @@ const ManageProducts = () => {
                 </div>
 
             }
+            <div className="flex justify-center items-center mt-5">
+                <div className="flex items-center gap-8 text=lg">
+                    <button className="text-xl"
+                        onClick={prev}
+                        disabled={active === 1}
+                    >
+                        <FaArrowAltCircleLeft className="h-8 w-8" />
+                    </button>
+                    <p color="gray" className="font-normal">
+                        Page <strong className="text-gray-900 text-xl">{active}</strong> of{" "}
+                        <strong className="text-gray-900 text-xl">{totalPage}</strong>
+                    </p>
+                    <button className="text-xl"
+                        onClick={next}
+                        disabled={active === totalPage}
+                    >
+                        <FaArrowAltCircleRight className="h-8 w-8" />
+                    </button>
+                </div>
+            </div>
 
         </div>
     );

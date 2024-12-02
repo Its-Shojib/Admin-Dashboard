@@ -16,6 +16,7 @@ Route::get('/products', [ProductController::class, 'getAllProducts']);
 
 //get product for paginate
 Route::get('/products/paginate/{page}', [ProductController::class, 'getPaginatedProducts']);
+Route::get('/manage-products/paginate/{page}', [ProductController::class, 'getPaginatedProducts']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/admin/{email}', [UserController::class, 'checkAdmin']);
