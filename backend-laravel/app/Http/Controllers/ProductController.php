@@ -167,4 +167,13 @@ class ProductController extends Controller
             'total_pages' => ceil(Products::count() / $productsPerPage),
         ], 200);
     }
+
+    //load 6 premium product
+    function getPremiumProducts(){
+        $premiumProducts = Products::take(6)->get();
+        return response()->json([
+            'result' => true,
+            'products' => $premiumProducts,
+        ], 200);
+    }
 }

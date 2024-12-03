@@ -1,13 +1,8 @@
 import { useState, useEffect } from "react";
-import useAuth from "../../Hooks/useAuth";
-import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
-import Swal from 'sweetalert2'
-import 'animate.css';
-import useCarts from "../../Hooks/useCarts";
-import { useNavigate } from "react-router-dom";
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import ProductCard from "../../components/ProductCard";
 
 const Products = () => {
     const [active, setActive] = useState(1);
@@ -18,10 +13,7 @@ const Products = () => {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [priceRange, setPriceRange] = useState({ min: 0, max: Infinity });
     const [selectedColor, setSelectedColor] = useState("");
-    let { user } = useAuth();
-    let axiosPrivate = useAxiosPrivate();
-    let [, , refetch] = useCarts();
-    let navigate = useNavigate();
+
     let axiosPublic = useAxiosPublic();
 
     const { data: productsFetch = [], isPending: productPending, refetch:productRefetch } = useQuery({
@@ -78,56 +70,6 @@ const Products = () => {
     useEffect(() => {
         productRefetch()
     }, [active, productRefetch])
-
-
-    const handleAddtoCart = async (id) => {
-        let cart = {
-            productId: id,
-            email: user?.email
-        }
-        let res = await axiosPrivate.post('/api/add-to-cart', cart);
-        if (res.data.result) {
-            refetch();
-            Swal.fire({
-                title: "Product added successfully",
-                showClass: {
-                    popup: `
-                    animate__animated
-                    animate__fadeInUp
-                    animate__faster
-                  `
-                },
-                hideClass: {
-                    popup: `
-                    animate__animated
-                    animate__fadeOutDown
-                    animate__faster
-                  `
-                }
-            });
-
-
-        } else {
-            Swal.fire({
-                title: "Product already exist in carts",
-                showClass: {
-                    popup: `
-                    animate__animated
-                    animate__fadeInUp
-                    animate__faster
-                  `
-                },
-                hideClass: {
-                    popup: `
-                    animate__animated
-                    animate__fadeOutDown
-                    animate__faster
-                  `
-                }
-            });
-            refetch();
-        }
-    }
 
     return (
         <div className="container mx-auto px-4 py-8 min-h-screen">
@@ -233,37 +175,7 @@ const Products = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:min-h-[700px]">
                             {filteredProducts.length > 0 ? (
                                 filteredProducts.map((product) => (
-                                    <div
-                                        key={product.id}
-                                        className="card bg-base-100 w-full shadow-xl max-h-[320px] p-5"
-                                    >
-                                        <figure className="px-10 pt-5">
-                                            <img
-                                                src={product.image}
-                                                alt={product.name}
-                                                className="rounded-xl w-full h-72 object-cover"
-                                            />
-                                        </figure>
-                                        <div className="items-center text-center">
-                                            <h2 className=" text-center text-lg font-semibold">
-                                                {product.name}
-                                            </h2>
-                                            <p className="text-sm text-gray-600">
-                                                Color: {product.color}
-                                            </p>
-                                            <p className="text-sm font-bold text-gray-800">
-                                                Price: ${product.price}
-                                            </p>
-                                            <div className="card-actions flex justify-center gap-2 mt-4">
-                                                <button onClick={() => navigate(`/product/${product?.id}`)} className="btn btn-primary">
-                                                    View Details
-                                                </button>
-                                                <button onClick={() => handleAddtoCart(product.id)} className="btn btn-secondary">
-                                                    Add to Cart
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <ProductCard key={product?.id} product={product}/>
                                 ))
                             ) : (
                                 <p className="text-center col-span-3">

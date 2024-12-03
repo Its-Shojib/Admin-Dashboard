@@ -13,6 +13,7 @@ Route::get('/profile/{email}', [UserController::class, 'getProfile']);
 
 // all product page
 Route::get('/products', [ProductController::class, 'getAllProducts']);
+Route::get('/premium-products', [ProductController::class, 'getPremiumProducts']);
 
 //get product for paginate
 Route::get('/products/paginate/{page}', [ProductController::class, 'getPaginatedProducts']);
