@@ -16,6 +16,7 @@ const Login = () => {
     let navigate = useNavigate();
     let axiosPublic = useAxiosPublic();
 
+    
     let handleLogin = async (e) => {
         e.preventDefault();
         let email = e.target.email.value;
@@ -49,7 +50,6 @@ const Login = () => {
             })
         }
     }
-
     return (
         <div className='w-full mx-auto'>
             <SectionTitle title={'Login Now'} subtitle={'browse more?'}></SectionTitle>
