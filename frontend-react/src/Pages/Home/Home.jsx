@@ -1,9 +1,12 @@
+import { Banner } from "./Banner";
+import Effect from "./Effect";
 
 
 const Home = () => {
     return (
         <div>
-            <p>Hi! I am Home </p>
+            <Banner />
+            <Effect />
         </div>
     );
 };
