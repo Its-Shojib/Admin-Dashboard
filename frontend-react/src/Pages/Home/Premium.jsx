@@ -19,8 +19,8 @@ const Premium = () => {
 
     return (
         <div className="max-w-screen-2xl mx-auto my-20">
-            <SectionTitle title={'Premium product'} subtitle={'here our'} />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20 mb-10">
+            <SectionTitle title={'Top sale products'} subtitle={'here our'} />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-10">
                 {premium?.map((product) => (
                     <ProductCard key={product?.id} product={product} />
                 ))

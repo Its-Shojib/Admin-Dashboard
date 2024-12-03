@@ -9,7 +9,7 @@ AOS.init();
 const Effect = () => {
   return (
     <div className="max-w-screen-2xl mx-auto my-20">
-      <SectionTitle title={'Our services'} subtitle={'what we do?'}></SectionTitle>
+      <SectionTitle title={'Know Our services'} subtitle={'what we do?'}></SectionTitle>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 my-10">
         {/* Card 1: Wide Product Range */}
         <div
