@@ -79,7 +79,7 @@ const ManageProducts = () => {
                         <span className="loading loading-spinner loading-lg"></span>
                     </div>
                 ) : <div className="overflow-x-auto min-h-[550px]">
-                    <table className="table-auto w-full border-collapse ">
+                    <table className="table-auto w-full border-collapse text-center">
                         <thead>
                             <tr className="bg-gray-100">
                                 <th className=" p-2">ID</th>
@@ -95,8 +95,8 @@ const ManageProducts = () => {
                         <tbody>
                             {productsFetch?.map((product, index) => (
                                 <tr key={product?.id} className="hover:bg-gray-50">
-                                    <td className=" p-2">{index + 1}</td>
-                                    <td className=" p-2">
+                                    <td className="p-2">{index + 1}</td>
+                                    <td className="p-2">
                                         <img
                                             src={product?.image}
                                             alt={product?.name}

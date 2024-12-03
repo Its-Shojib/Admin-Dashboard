@@ -8,8 +8,8 @@ AOS.init();
 
 const Effect = () => {
   return (
-    <div>
-      <SectionTitle title={'Our services'} subtitle={'need trust?'}></SectionTitle>
+    <div className="max-w-screen-2xl mx-auto">
+      <SectionTitle title={'Our services'} subtitle={'what we do?'}></SectionTitle>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 my-10">
         {/* Card 1: Wide Product Range */}
         <div
