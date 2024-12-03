@@ -82,14 +82,14 @@ const ManageProducts = () => {
                     <table className="table-auto w-full border-collapse text-center">
                         <thead>
                             <tr className="bg-gray-100">
-                                <th className=" p-2">ID</th>
-                                <th className=" p-2">Image</th>
-                                <th className=" p-2">Name</th>
-                                <th className=" p-2">Category</th>
-                                <th className=" p-2">Price</th>
-                                <th className=" p-2">Color</th>
-                                <th className=" p-2">Brand</th>
-                                <th className=" p-2">Actions</th>
+                                <th className="p-2">ID</th>
+                                <th className="p-2">Image</th>
+                                <th className="p-2">Name</th>
+                                <th className="p-2">Category</th>
+                                <th className="p-2">Price</th>
+                                <th className="p-2">Color</th>
+                                <th className="p-2">Brand</th>
+                                <th className="p-2">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -103,12 +103,18 @@ const ManageProducts = () => {
                                             className="w-16 h-16 object-cover rounded-full"
                                         />
                                     </td>
-                                    <td className=" p-2">{product?.name}</td>
-                                    <td className=" p-2">{product?.category}</td>
-                                    <td className=" p-2">{product?.price}</td>
-                                    <td className=" p-2">{product?.color}</td>
-                                    <td className=" p-2">{product?.brand}</td>
-                                    <td className=" p-2">
+                                    <td className="p-2">{product?.name}</td>
+                                    <td className="p-2">{product?.category}</td>
+                                    <td className="p-2">{product?.price}</td>
+                                    <td className="p-2">{product?.color}</td>
+                                    <td className="p-2">{product?.brand}</td>
+                                    <td className="p-2">
+                                        <button
+                                            className="bg-green-800 text-white px-4 py-1 rounded mr-2"
+                                            onClick={() => navidate(`/product/${product?.id}`)}
+                                        >
+                                            View
+                                        </button>
                                         <button
                                             className="bg-blue-500 text-white px-4 py-1 rounded mr-2"
                                             onClick={() => navidate(`/dashboard/update-product/${product?.id}`)}

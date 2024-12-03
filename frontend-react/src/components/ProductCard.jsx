@@ -81,7 +81,7 @@ const ProductCard = ({ product }) => {
     return (
         <div
             key={product.id}
-            className="card bg-base-100 w-full shadow-xl max-h-[370px] p-5"
+            className="card w-full shadow-inner max-h-[370px] p-5"
         >
             <figure className="px-5 pt-5">
                 <img

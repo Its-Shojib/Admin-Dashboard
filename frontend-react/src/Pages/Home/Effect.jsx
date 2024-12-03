@@ -8,14 +8,14 @@ AOS.init();
 
 const Effect = () => {
   return (
-    <div className="max-w-screen-2xl mx-auto">
+    <div className="max-w-screen-2xl mx-auto my-20">
       <SectionTitle title={'Our services'} subtitle={'what we do?'}></SectionTitle>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 my-10">
         {/* Card 1: Wide Product Range */}
         <div
           data-aos="flip-up"
           data-aos-duration="3000"
-          className="px-4 font-play glass py-8 max-w-[450px] shadow-lg font-sans space-y-3 mx-auto bg-[#bcb382]"
+          className="px-4 font-play glass py-8 max-w-[450px] shadow-lg font-sans space-y-3 mx-auto bg-[#c9d6dd]"
         >
           <div className="flex gap-3 items-start justify-center">
             <div className="flex flex-col justify-center w-full h-52 lg:h-[280px] relative">
@@ -48,7 +48,7 @@ const Effect = () => {
         <div
           data-aos="flip-up"
           data-aos-duration="3000"
-          className="px-4 font-play glass py-8 max-w-[450px] shadow-lg font-sans space-y-3 mx-auto bg-[#bcb382]"
+          className="px-4 font-play glass py-8 max-w-[450px] shadow-lg font-sans space-y-3 mx-auto bg-[#c9d6dd]"
         >
           <div className="flex items-start justify-center">
             <div className="flex flex-col justify-center w-full h-52 lg:h-[280px] relative">
@@ -80,7 +80,7 @@ const Effect = () => {
         <div
           data-aos="flip-up"
           data-aos-duration="3000"
-          className="px-4 font-play glass py-8 max-w-[450px] shadow-lg font-sans space-y-3 mx-auto bg-[#bcb382]"
+          className="px-4 font-play glass py-8 max-w-[450px] shadow-lg font-sans space-y-3 mx-auto bg-[#c9d6dd]"
         >
           <div className="flex items-start gap-2 justify-center">
             <div className="flex flex-col justify-center w-full h-52 lg:h-[280px] relative">

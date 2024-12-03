@@ -12,7 +12,7 @@ import SectionTitle from '../../components/SectionTitle';
 
 const Review = () => {
     return (
-        <div className='max-w-screen-2xl mx-auto'>
+        <div className='max-w-screen-2xl mx-auto my-20'>
             <SectionTitle title={'Customer Review'} subtitle={'need trust?'}></SectionTitle>
             <div className='rounded-lg my-10 py-5 px-4 bg-[#f3f9fc]'>
                 <Swiper

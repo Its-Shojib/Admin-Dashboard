@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../../components/SectionTitle";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import ProductCard from "../../components/ProductCard";
+import { Link } from "react-router-dom";
 
 
 const Premium = () => {
@@ -19,12 +20,16 @@ const Premium = () => {
     return (
         <div className="max-w-screen-2xl mx-auto my-20">
             <SectionTitle title={'Premium product'} subtitle={'here our'} />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
-                { premium?.map((product) => (
-                        <ProductCard key={product?.id} product={product}/>
-                    ))
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20 mb-10">
+                {premium?.map((product) => (
+                    <ProductCard key={product?.id} product={product} />
+                ))
                 }
             </div>
+            <div className="flex justify-center items-center">
+                <button className="bg-black text-white px-4 py-2 rounded-md text-lg"><Link to={'/products'}>See more products</Link></button>
+            </div>
+
         </div>
     );
 };
