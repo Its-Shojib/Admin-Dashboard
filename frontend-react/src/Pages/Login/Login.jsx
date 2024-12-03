@@ -16,7 +16,6 @@ const Login = () => {
     let navigate = useNavigate();
     let axiosPublic = useAxiosPublic();
 
-
     let handleLogin = async (e) => {
         e.preventDefault();
         let email = e.target.email.value;
