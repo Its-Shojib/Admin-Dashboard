@@ -68,13 +68,13 @@ const CartPage = () => {
         <div className="w-full md:w-10/12 mx-auto px-4">
             {
                 cartsPending ? (
-                    <div className="text-center flex justify-center items-center h-screen">
+                    <div className="text-center flex justify-center items-center min-h-[calc(100vh-400px)]">
                         <span className="loading loading-spinner loading-lg"></span>
                     </div>
                 ) : (
                     cart?.length === 0 ? (
-                        <div className="flex justify-center items-center h-screen">
-                            <h1 className="min-h-[calc(100vh-400px)]">Your cart is empty.</h1>
+                        <div className="text-center flex justify-center items-center min-h-[calc(100vh-400px)]">
+                            <h1 className="">Your cart is empty.</h1>
                         </div>
                     ) : (
                         <div className="flex justify-center items-start gap-20 my-10">
