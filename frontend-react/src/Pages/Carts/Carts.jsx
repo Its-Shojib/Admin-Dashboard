@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import useCarts from "../../Hooks/useCarts";
 import Swal from "sweetalert2";
 import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
+import useAuth from "../../Hooks/useAuth";
 
 const CartPage = () => {
     const [carts, cartsPending, refetch] = useCarts();
     const [cart, setCart] = useState([]);
     let axiosPrivate = useAxiosPrivate();
+    let { user } = useAuth();
 
     const deleteCart = async (id) => {
         Swal.fire({
@@ -63,6 +65,54 @@ const CartPage = () => {
             return total + item.quantity * item.product.price;
         }, 0);
     };
+
+    const handlePayment = () => {
+        Swal.fire({
+            title: "Are you sure to make payment?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Confirm!",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    let payment = {
+                        email: user.email,
+                        price: cart.reduce((total, item) => {
+                            return total + item.quantity * item.product.price;
+                        }, 0),
+                        transactionId: parseInt(Math.random()*1000000),
+                        cartItems: cart.map((item) => ({
+                            productId: item.product.id,
+                            quantity: item.quantity
+                        }))
+                    }
+                    console.log(payment)
+                    let res = await axiosPrivate.post("/api/payments", payment)
+                    console.log(res)
+                    if (res.data.result) {
+                        Swal.fire(
+                            "Success!",
+                            "Payment successful. Your transaction ID is: " + payment.transactionId,
+                            "success"
+                        );
+                        refetch();
+                    }else{
+                        console.log(res.data.errors)
+                    }
+                } catch (error) {
+                    console.error("Error to make payments:", error);
+                    Swal.fire(
+                        "Error!",
+                        "An error occurred.",
+                        "error"
+                    );
+                }
+            }
+        });
+    }
 
     return (
         <div className="w-full md:w-10/12 mx-auto px-4">
@@ -140,7 +190,7 @@ const CartPage = () => {
                                 {/* Pay Now Button */}
                                 <div className="mt-4 text-right">
                                     <button
-                                        onClick={() => alert("Proceeding to payment...")}
+                                        onClick={handlePayment}
                                         className="bg-teal-600 text-white px-6 py-2 rounded-lg hover:bg-teal-700"
                                     >
                                         Pay Now

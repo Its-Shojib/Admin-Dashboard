@@ -11,12 +11,15 @@ class Payments extends Model
 
     // Add `items` to the fillable array to allow mass assignment
     protected $fillable = [
-        'items',
+        'price',
+        'transactionId',
+        'email', 
+        'cartItems',
     ];
 
     // Cast `items` to an array
     protected $casts = [
-        'items' => 'array',
+        'cartItems' => 'array',
     ];
 }
 

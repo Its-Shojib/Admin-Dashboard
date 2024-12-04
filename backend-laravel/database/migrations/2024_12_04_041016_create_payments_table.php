@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->string('email');
-            $table->string('transactionId');
             $table->decimal('price');
-            $table->json('items');
-            $table->integer('quantity');
+            $table->string('transactionId');
+            $table->json('cartItems');
             $table->timestamps();
         });
     }

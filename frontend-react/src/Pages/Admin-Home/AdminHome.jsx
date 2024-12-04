@@ -39,7 +39,7 @@ const AdminHome = () => {
         {
             name: 'Revenew',
             Products: status?.products?.length,
-            Orders: status?.paymentsCount+1,
+            Orders: status?.paymentsCount + 1,
             amt: 2400,
         },
     ];
@@ -157,54 +157,55 @@ const AdminHome = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex flex-col md:flex-row justify-center items-center mt-24 gap-10">
-                            <div>
-                                <ResponsiveContainer width={"100%"} height={400}>
-                                    <PieChart
-                                        width={400}
-                                        height={400}>
-                                        <Pie
-                                            data={data}
-                                            cx="50%"
-                                            cy="50%"
-                                            labelLine={false}
-                                            label={renderCustomizedLabel}
-                                            outerRadius={80}
-                                            fill="#8884d8"
-                                            dataKey="value"
-                                        >
-                                            {data?.map((entry, index) => (
-                                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                                            ))}
-                                        </Pie>
-                                        <Legend></Legend>
-                                    </PieChart>
-                                </ResponsiveContainer>
-                            </div>
-
-                            <div>
-                                <ResponsiveContainer width={"100%"} height={400}>
-                                    <BarChart
-                                        width={400}
-                                        height={400}
-                                        data={data2}
-                                        margin={{
-                                            top: 5,
-                                            right: 30,
-                                            left: 20,
-                                            bottom: 5,
-                                        }}
+                        {/* <div className="flex flex-col md:flex-row justify-center items-center mt-24 gap-10"> */}
+                        <div>
+                            <ResponsiveContainer width={"100%"} height={400}>
+                                <PieChart
+                                    width={400}
+                                    height={400}>
+                                    <Pie
+                                        data={data}
+                                        cx="50%"
+                                        cy="50%"
+                                        labelLine={false}
+                                        label={renderCustomizedLabel}
+                                        outerRadius={80}
+                                        fill="#8884d8"
+                                        dataKey="value"
                                     >
-                                        <CartesianGrid strokeDasharray="3 3" />
-                                        <XAxis dataKey="name" />
-                                        <YAxis />
-                                        <Tooltip />
-                                        <Legend />
-                                        <Bar dataKey="Orders" fill="#8884d8" activeBar={<Rectangle fill="pink" stroke="blue" />} />
-                                        <Bar dataKey="Products" fill="#82ca9d" activeBar={<Rectangle fill="gold" stroke="purple" />} />
-                                    </BarChart>
-                                </ResponsiveContainer>
-                            </div>
+                                        {data?.map((entry, index) => (
+                                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                        ))}
+                                    </Pie>
+                                    <Legend></Legend>
+                                </PieChart>
+                            </ResponsiveContainer>
+                        </div>
+
+
+                        {/* </div> */}
+                        <div>
+                            <ResponsiveContainer width={"100%"} height={400}>
+                                <BarChart
+                                    width={500}
+                                    height={400}
+                                    data={data2}
+                                    margin={{
+                                        top: 5,
+                                        right: 30,
+                                        left: 20,
+                                        bottom: 5,
+                                    }}
+                                >
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="name" />
+                                    <YAxis />
+                                    <Tooltip />
+                                    <Legend />
+                                    <Bar dataKey="Orders" fill="#8884d8" activeBar={<Rectangle fill="pink" stroke="blue" />} />
+                                    <Bar dataKey="Products" fill="#82ca9d" activeBar={<Rectangle fill="gold" stroke="purple" />} />
+                                </BarChart>
+                            </ResponsiveContainer>
                         </div>
                     </>
                 )

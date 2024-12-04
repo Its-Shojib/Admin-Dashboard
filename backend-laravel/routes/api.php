@@ -4,6 +4,8 @@ use App\Http\Controllers\CartsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PaymentController;
+
 
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/signup', [UserController::class, 'signup']);
@@ -37,10 +39,18 @@ Route::middleware(['auth:sanctum'])->group(function () {
     //delete a cart item
     Route::delete('/carts/{id}', [CartsController::class, 'deleteCartItem']);
 
+    //payment
+    Route::post('/payments', [PaymentController::class, 'addPayment']);
+
+    //load my payment history
+    Route::get('/payment-history/{email}', [PaymentController::class, 'loadMyPaymentHistory']);
     
 });
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin-home/users', [UserController::class, 'loadAllUsers']);
     Route::get('/admin-home/status', [UserController::class, 'adminStatus']);
+
+    //load all payment history
+    Route::get('/admin/payment-history', [PaymentController::class, 'loadAllPaymentHistory']);
 });
 
