@@ -41,5 +41,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
 });
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin-home/users', [UserController::class, 'loadAllUsers']);
+    Route::get('/admin-home/status', [UserController::class, 'adminStatus']);
 });
 

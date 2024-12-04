@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use App\Models\Carts;
+use App\Models\Products;
+use App\Models\Payments;
 
 class UserController extends Controller
 {
@@ -48,8 +51,6 @@ class UserController extends Controller
             ], 200);
         }
     }
-
-
 
     //login User
     function login(Request $request)
@@ -132,5 +133,29 @@ class UserController extends Controller
                'message' => 'User not found',
             ], 400);
         }
+    }
+
+    //admin status for count user, payments, products
+    function adminStatus(){
+        $usersCount = User::count();
+        $cartsCount = Carts::count();
+        //count admin
+        $adminUsersCount = User::where('user_role', 1)->count();
+        //count all payments and products count
+        $paymentsCount = Payments::count();
+        $productsCount = Products::count();
+
+        //all products
+        $products = Products::all();
+
+        return response()->json([
+            "result" => true,
+            'usersCount' => $usersCount,
+            'paymentsCount' => $paymentsCount,
+            'productsCount' => $productsCount,
+            'adminUsersCount' => $adminUsersCount,
+            'cartsCount' => $cartsCount,
+            'products' => $products,
+        ], 200);
     }
 }
