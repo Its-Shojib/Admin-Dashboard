@@ -18,6 +18,7 @@ import SingleProduct from "../Pages/SingleProducts/SingleProduct";
 import Carts from "../Pages/Carts/Carts";
 import Profile from "../Pages/Profile/Profile";
 import ErrorPage from "../Pages/Error/ErrorPage";
+import PaymentHistory from "../Pages/Payments-History/PaymentHistory";
 
 const router = createBrowserRouter([
     {
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
             {
                 path: "manage-products",
                 element: <AdminRoute><ManageProducts /></AdminRoute>
+            },
+            {
+                path: "view-history",
+                element: <AdminRoute><PaymentHistory /></AdminRoute>
             },
             {
                 path: "update-product/:id",

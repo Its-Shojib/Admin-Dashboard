@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from 'react-router-dom';
-import { FaGifts, FaHome, FaRProject, FaUsers } from 'react-icons/fa';
+import { FaGifts, FaHistory, FaHome, FaRProject, FaUsers } from 'react-icons/fa';
 import { VscThreeBars } from "react-icons/vsc";
 import useAdmin from '../Hooks/useAdmin';
 import Navbar from '../components/Navbar';
@@ -32,6 +32,11 @@ const Dashboard = () => {
                 to='manage-users' >
                 <FaUsers></FaUsers>Manage User</NavLink>
         </li>
+        <li >
+            <NavLink className='flex items-center font-bold gap-2'
+                to='view-history' >
+                <FaHistory></FaHistory>View History</NavLink>
+        </li>
 
     </>
 
@@ -56,7 +61,6 @@ const Dashboard = () => {
                                 isAdmin && <>
                                     {systemAdmin}
                                 </>
-
                             }
                         </ul>
                     </div>
