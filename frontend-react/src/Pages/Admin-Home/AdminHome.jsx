@@ -39,7 +39,7 @@ const AdminHome = () => {
         {
             name: 'Revenew',
             Products: status?.products?.length,
-            Orders: status?.paymentsCount + 1,
+            Orders: status?.paymentsCount,
             amt: 2400,
         },
     ];
