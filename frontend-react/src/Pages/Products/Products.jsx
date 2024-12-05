@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import ProductCard from "../../components/ProductCard";
+import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
 
 const Products = () => {
     const [active, setActive] = useState(1);
@@ -14,12 +14,12 @@ const Products = () => {
     const [priceRange, setPriceRange] = useState({ min: 0, max: Infinity });
     const [selectedColor, setSelectedColor] = useState("");
 
-    let axiosPublic = useAxiosPublic();
+    let axiosPrivate = useAxiosPrivate();
 
     const { data: productsFetch = [], isPending: productPending, refetch:productRefetch } = useQuery({
         queryKey: ['productsFetch'],
         queryFn: async () => {
-            const res = await axiosPublic.get(`/api/products/paginate/${active}`);
+            const res = await axiosPrivate.get(`/api/products/paginate/${active}`);
             setTotalPage(res.data.total_pages)
             return res.data.products;
         }

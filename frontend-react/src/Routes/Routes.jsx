@@ -42,12 +42,32 @@ const router = createBrowserRouter([
             {
                 path: "/profile/:id",
                 element: <PrivateRoutes><Profile /></PrivateRoutes>,
-                loader: ({ params }) => fetch(`http://127.0.0.1:8000/api/profile/${params.id}`)
+                loader: async ({ params }) => {
+                    const token = localStorage.getItem('access-token');
+                    const response = await fetch(`http://127.0.0.1:8000/api/profile/${params.id}`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json',
+                        },
+                    });
+                    return response.json();
+                }
             },
             {
                 path: "/product/:id",
                 element: <PrivateRoutes><SingleProduct /></PrivateRoutes>,
-                loader: ({ params }) => fetch(`http://127.0.0.1:8000/api/product/${params.id}`)
+                loader: async ({ params }) => {
+                    const token = localStorage.getItem('access-token');
+                    const response = await fetch(`http://127.0.0.1:8000/api/product/${params.id}`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json',
+                        },
+                    });
+                    return response.json();
+                }
             },
             {
                 path: "/about",
@@ -55,7 +75,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/carts",
-                element: <PrivateRoutes><Carts/></PrivateRoutes>,
+                element: <PrivateRoutes><Carts /></PrivateRoutes>,
             },
             {
                 path: "/contact",
@@ -98,7 +118,18 @@ const router = createBrowserRouter([
             {
                 path: "update-product/:id",
                 element: <AdminRoute><UpdateProduct /></AdminRoute>,
-                loader: ({ params }) => fetch(`http://127.0.0.1:8000/api/product/${params.id}`)
+                loader: async ({ params }) => {
+                    const token = localStorage.getItem('access-token');
+                    const response = await fetch(`http://127.0.0.1:8000/api/product/${params.id}`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json',
+                        },
+                    });
+                    return response.json();
+
+                }
             }
         ]
 

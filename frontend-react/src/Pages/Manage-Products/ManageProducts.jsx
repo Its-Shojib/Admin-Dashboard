@@ -5,17 +5,19 @@ import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
+import useAuth from "../../Hooks/useAuth";
 
 const ManageProducts = () => {
     const [active, setActive] = useState(1);
     const [totalPage, setTotalPage] = useState(null);
     let axiosPrivate = useAxiosPrivate();
     let navidate = useNavigate();
+    let { user } = useAuth();
 
     const { data: productsFetch = [], isPending, refetch: productRefetch } = useQuery({
         queryKey: ['products-paginate'],
         queryFn: async () => {
-            const res = await axiosPrivate.get(`/api/manage-products/paginate/${active}`);
+            const res = await axiosPrivate.get(`/api/manage-products/paginate/${active}?email=${user?.email}`);
             setTotalPage(res.data.total_pages)
             return res.data.products;
         }
