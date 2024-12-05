@@ -51,6 +51,6 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin-home/status', [UserController::class, 'adminStatus']);
 
     //load all payment history
-    Route::get('/admin/payment-history', [PaymentController::class, 'loadAllPaymentHistory']);
+    Route::get('/payment/history', [PaymentController::class, 'loadAllPaymentHistory']);
 });
 
