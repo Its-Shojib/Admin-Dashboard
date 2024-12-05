@@ -104,6 +104,11 @@ const Navbar = () => {
                                         Profile
                                     </Link>
                                 </li>
+                                <li>
+                                    <Link to={`/history`} className="justify-between">
+                                        History
+                                    </Link>
+                                </li>
                                 {
                                     isAdmin && <li><Link to={'/dashboard/admin-home'}>Dashboard</Link></li>
                                 }

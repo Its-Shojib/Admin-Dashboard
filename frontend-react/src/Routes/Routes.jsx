@@ -19,6 +19,7 @@ import Carts from "../Pages/Carts/Carts";
 import Profile from "../Pages/Profile/Profile";
 import ErrorPage from "../Pages/Error/ErrorPage";
 import PaymentHistory from "../Pages/Payments-History/PaymentHistory";
+import History from "../Pages/History/History";
 
 const router = createBrowserRouter([
     {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
             {
                 path: "/products",
                 element: <PrivateRoutes><Products /></PrivateRoutes>,
+            },
+            {
+                path: "/history",
+                element: <PrivateRoutes><History /></PrivateRoutes>,
             },
             {
                 path: "/profile/:id",

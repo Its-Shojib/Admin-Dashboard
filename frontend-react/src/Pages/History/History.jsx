@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Box, Button, Modal, Typography } from "@mui/material";
 import SectionTitle from "../../components/SectionTitle";
-import UseLoadPaymentHistory from "../../Hooks/useLoadPaymentHistory";
 import { DataGrid } from "@mui/x-data-grid";
+import UseLoadMyPaymentHistory from "../../Hooks/useLoadMyPaymentHistory";
 
-const PaymentHistory = () => {
-  let [payments, paymentsPending] = UseLoadPaymentHistory();
+const History = () => {
+  let [payments, paymentsPending] = UseLoadMyPaymentHistory();
   const [openModal, setOpenModal] = useState(false);
   const [selectedCartItems, setSelectedCartItems] = useState([]);
 
@@ -22,10 +22,10 @@ const PaymentHistory = () => {
   const columns = [
     { field: "index", headerName: "Index", width: 80 },
     { field: "id", headerName: "ID", width: 80 },
-    { field: "email", headerName: "Email", width: 225 },
-    { field: "price", headerName: "Price", width: 225 },
+    { field: "email", headerName: "Email", width: 250 },
+    { field: "price", headerName: "Price", width: 250 },
     { field: "transactionId", headerName: "Transaction Id", width: 150 },
-    { field: "created_at", headerName: "Created_at", width: 250 },
+    { field: "created_at", headerName: "Created_at", width: 280 },
     {
       field: "details",
       headerName: "Details",
@@ -48,14 +48,14 @@ const PaymentHistory = () => {
   }));
 
   return (
-    <div className="w-full md:w-11/12 mx-auto">
-      <SectionTitle title={"All Payments Info"} subtitle={"need details?"} />
+    <div className="w-full md:w-10/12 mx-auto md:pl-10">
+      <SectionTitle title={"My Payments Info"} subtitle={"need details?"} />
       {paymentsPending ? (
         <div className="text-center h-screen">
           <span className="loading loading-spinner loading-lg"></span>
         </div>
       ) : (
-        <div className="my-10 w-full mx-auto px-2 md:px-10 max-w-[425px] md:max-w-full overflow-auto max-h-screen">
+        <div className="my-10 w-full mx-auto px-2 md:px-10 max-w-[425px] md:max-w-full overflow-auto max-h-screen ">
           <Box sx={{ height: 650, width: "100%" }}>
             <DataGrid
               rows={rows}
@@ -111,4 +111,4 @@ const PaymentHistory = () => {
   );
 };
 
-export default PaymentHistory;
+export default History;
